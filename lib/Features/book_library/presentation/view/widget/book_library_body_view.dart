@@ -38,7 +38,7 @@ class _BookLibraryBodyViewState extends State<BookLibraryBodyView> {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
       /* Increment one to fetch information (lazy Load) */
-      cubit.fetchBooks(pageNumber: cubit.pageNumber++);
+      cubit.fetchBooks(pageNumber: ++cubit.pageNumber);
     }
   }
 

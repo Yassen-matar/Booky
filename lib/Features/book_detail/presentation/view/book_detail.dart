@@ -32,13 +32,17 @@ class BookDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomBookImage(image: books.image ?? ""),
+                    CustomBookImage(image: books.image ?? ""), 
+                    const SizedBox(height: 20,),
                     Text(
                       books.title,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Text(books.authorName!),
+                    const SizedBox(height: 10,),
+                    Text(books.authorName! ,style: TextStyle(fontWeight: FontWeight.w600),),
+                    const SizedBox(height: 10,),
                     RatingBar.readOnly(
                       alignment: Alignment.center,
                       filledColor: AppColor.primaryColor,
@@ -47,6 +51,7 @@ class BookDetail extends StatelessWidget {
                       initialRating: books.rating?.toDouble() ?? 0.0,
                       maxRating: 5,
                     ),
+                    const SizedBox(height: 10,),
                     Text(books.description ?? "")
                   ],
                 ),

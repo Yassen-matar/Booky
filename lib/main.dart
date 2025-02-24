@@ -9,6 +9,7 @@ Future<void> main() async {
   runApp(const MyApp());
 /* init cubit with git_it */
   await initCubit();
+  /* observer Bloc */
   Bloc.observer = SimpleBlocObserver();
 }
 
