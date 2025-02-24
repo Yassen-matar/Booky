@@ -47,7 +47,7 @@ class BookLibrary extends StatelessWidget {
                   BookLibraryCubit cubit =
                       BlocProvider.of<BookLibraryCubit>(context);
                   cubit.books = [];
-
+cubit.pageNumber = 0;
                   return cubit.fetchBooks(pageNumber: 0);
                 },
                 child: BookLibraryBodyView(
