@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:booky/Features/book_library/domain/entities/book_entity.dart';
 import 'package:booky/Features/book_library/domain/use_cases/fetch_books_use_case.dart';
 import 'package:booky/core/function/check_internet.dart';
+import 'package:booky/core/storage/secure_storage.dart';
 import 'package:meta/meta.dart';
 
 part 'book_library_state.dart';
@@ -9,11 +10,22 @@ part 'book_library_state.dart';
 class BookLibraryCubit extends Cubit<BookLibraryState> {
   FetchBooksUseCase fetchBooksUseCase;
   BookLibraryCubit(this.fetchBooksUseCase) : super(BookLibraryInitial());
-  
+
   List<BookEntity> books = [];
   /* page number to pagination */
   int pageNumber = 0;
 
+  Future<void> fetchLocalBooks() async {
+    emit(BookLibraryLoading());
+
+    List<BookEntity>? localBook = await SecureStorage.getBooks();
+    if (localBook == null || localBook == []) {
+      await fetchBooks(pageNumber: 0);
+    } else {
+      books = localBook;
+    }
+    emit(BookLibrarySuccessLocal());
+  }
 
   Future<void> fetchBooks({int pageNumber = 0}) async {
     if (pageNumber == 0) {

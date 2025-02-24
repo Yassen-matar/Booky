@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-
+import 'package:booky/Features/book_library/data/models/book_model/book_model.dart';
+import 'package:booky/Features/book_library/domain/entities/book_entity.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorage {
@@ -13,13 +14,48 @@ class SecureStorage {
 
   static const String keybook = 'book';
 
-
   factory SecureStorage() {
     return _instance;
   }
   SecureStorage._internal();
 
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+
+  static Future<void> setBooks(List<BookEntity>? result) async {
+    try {
+      if (result != null) {
+        await storage.write(key: keybook, value: jsonEncode(result));
+      } else {
+        // If the result is null, clear the data in secure storage
+        await storage.delete(key: keybook);
+      }
+    } catch (e) {
+      ("Error setting user data: $e");
+      // You may want to handle the error or rethrow it
+      rethrow;
+    }
+  }
+
+  static Future<List<BookEntity>?> getBooks() async {
+    try {
+      // Fetch the data stored under a specific key
+      String? jsonString = await storage.read(key: keybook);
+
+      // If data is found, decode it and map to List<Result>
+      if (jsonString != null) {
+        List<dynamic> jsonData = jsonDecode(jsonString);
+        List<BookEntity> resultList =
+            jsonData.map((json) => BookModel.fromJson(json)).toList();
+        return resultList;
+      } else {
+        // If no data found, return null or an empty list
+        return null;
+      }
+    } catch (e) {
+      ("Error retrieving user data: $e");
+      return null;
+    }
+  }
 
   Future<void> writeSecureData(String key, String value) async {
     await _secureStorage.write(key: key, value: value);
@@ -86,11 +122,11 @@ class SecureStorage {
     }
   }
 
-  static Future getToken() async {
-    return await storage.read(
-      key: _keyToken,
-    );
-  }
+    static Future getToken() async {
+      return await storage.read(
+        key: _keyToken,
+      );
+    }
 
   static Future getTimeZone() async {
     return await storage.read(

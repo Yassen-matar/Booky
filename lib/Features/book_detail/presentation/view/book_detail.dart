@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/constant/app_svg.dart';
 
+// ignore: must_be_immutable
 class BookDetail extends StatelessWidget {
   BookDetail({super.key, required this.books});
   BookEntity books;
@@ -27,15 +28,18 @@ class BookDetail extends StatelessWidget {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: Column( 
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomBookImage(image: books.image ?? ""),
-                    Text(books.title),
+                    Text(
+                      books.title,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                     Text(books.authorName!),
-                    /*   Text(books.rating.toString()), */
-                    RatingBar.readOnly( 
+                    RatingBar.readOnly(
                       alignment: Alignment.center,
                       filledColor: AppColor.primaryColor,
                       filledIcon: Icons.star,

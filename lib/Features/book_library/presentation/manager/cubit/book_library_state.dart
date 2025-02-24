@@ -6,7 +6,7 @@ sealed class BookLibraryState {}
 final class BookLibraryInitial extends BookLibraryState {}
 
 final class BookLibraryLoading extends BookLibraryState {}
-final class BookLibrarySearchToggle extends BookLibraryState {}
+final class BookLibrarySuccessLocal extends BookLibraryState {}
 
 final class BookLibraryPaginationLoading extends BookLibraryState {}
 final class BookLibraryNoConnection extends BookLibraryState {}
