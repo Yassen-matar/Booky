@@ -6,8 +6,7 @@ import 'package:dartz/dartz.dart';
 abstract class BookLibraryRepo {
   Future<Either<Failure, List<BookEntity>>> fetchBooks(
       {int pageNumber = 0});
-        Future<Either<Failure, List<BookEntity>>> fetchSearchBooks({String? q}) ;
-/*   Future<Either<Failure, List<BookEntity>>> fetchNewestBooks(); */
+
 }
 
 

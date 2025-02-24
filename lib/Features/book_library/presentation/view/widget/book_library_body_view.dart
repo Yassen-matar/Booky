@@ -54,7 +54,7 @@ class _BookLibraryBodyViewState extends State<BookLibraryBodyView> {
       listener: (context, state) {},
       builder: (context, state) {
         return Stack(children: [
-          const CustomBackGroundPage(),
+          const CustomBackGroundPage(), 
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             widget.books.isEmpty
                 ? const SizedBox.shrink()

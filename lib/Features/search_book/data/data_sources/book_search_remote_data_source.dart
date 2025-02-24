@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:booky/Features/book_library/domain/entities/book_entity.dart';
 import 'package:booky/core/server/config.dart';
@@ -8,8 +7,7 @@ import '../../../book_library/data/models/book_model/book_model.dart';
 
 abstract class BookSearchRemoteDataSource {
   Future<List<BookEntity>> fetchSearchBooks({String q});
-/*   Future<List<BookEntity>> fetchFeaturedBooks({int pageNumber = 0});
-  Future<List<BookEntity>> fetchNewestBooks(); */
+
 }
 
 class BookSearchRemoteDataSourceImpl extends BookSearchRemoteDataSource {
@@ -17,11 +15,15 @@ class BookSearchRemoteDataSourceImpl extends BookSearchRemoteDataSource {
 
   @override
   Future<List<BookEntity>> fetchSearchBooks({String? q}) async {
-    var data = await configApi.get(completeUrl: 'volumes?q=$q');
+    try {
+      var data = await configApi.get(completeUrl: 'volumes?q=$q');
 
-    List<BookEntity> searchBooks = getBooksList(data);
+      List<BookEntity> searchBooks = getBooksList(data);
 
-    return searchBooks;
+      return searchBooks;
+    } on Exception {
+      throw Exception("There Error Please open vpn and try again");
+    }
   }
 
   List<BookEntity> getBooksList(Map<String, dynamic> data) {

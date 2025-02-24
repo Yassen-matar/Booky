@@ -1,3 +1,5 @@
+import 'package:booky/Features/book_detail/presentation/view/book_detail.dart';
+import 'package:booky/Features/book_library/domain/entities/book_entity.dart';
 import 'package:booky/Features/book_library/presentation/view/book_library.dart';
 import 'package:booky/Features/search_book/presentation/view/search_book.dart';
 import 'package:booky/Features/splash/presentation/view/splash.dart';
@@ -19,5 +21,13 @@ final router = GoRouter(
       path: '/search',
       builder: (context, state) => const SearchBook(),
     ),
+    GoRoute(
+      path: '/bookDetail',
+      builder: (context, state) {
+        final book =
+            state.extra as BookEntity; // تأكد من التحويل إلى BookEntity
+        return BookDetail(books: book);
+      },
+    )
   ],
 );

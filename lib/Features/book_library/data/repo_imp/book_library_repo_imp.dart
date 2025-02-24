@@ -25,19 +25,4 @@ class BookLibraryRepoImp extends BookLibraryRepo {
     }
   }
 
-  @override
-  Future<Either<Failure, List<BookEntity>>> fetchSearchBooks(
-      {String? q}) async {
-    List<BookEntity> searchBooks;
-    try {
-      searchBooks =
-          await bookLibraryRemoteDataSource.fetchSearchBooks(q: q ?? "");
-      return right(searchBooks);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDiorError(e));
-      }
-      return left(ServerFailure(e.toString()));
-    }
-  }
 }

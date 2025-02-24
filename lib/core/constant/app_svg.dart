@@ -5,4 +5,5 @@ class AppSvg {
   static const String errorSnackL = "$root/error_snack_l.svg";
   static const String lightTrue = "$root/light_true.svg";
   static const String lightWarning = "$root/light_warning.svg";
+  static const String backgroundForms = "$root/background_forms.svg";
 }

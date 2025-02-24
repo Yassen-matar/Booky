@@ -1,16 +1,16 @@
-import 'package:booky/Features/book_library/domain/repos/book_library_repo.dart';
+import 'package:booky/Features/search_book/domain/repos/book_library_repo.dart';
 import 'package:booky/core/server/failure.dart';
 import 'package:dartz/dartz.dart';
 
 import '../entities/book_entity.dart';
 
 class FetchSearchBooksUseCase {
-  final BookLibraryRepo bookLibraryRepo;
+  final BookSearchRepo bookSearchRepo;
 
-  FetchSearchBooksUseCase(this.bookLibraryRepo);
+  FetchSearchBooksUseCase(this.bookSearchRepo);
 
   Future<Either<Failure, List<BookEntity>>> call({String? q}) async {
-    return await bookLibraryRepo.fetchSearchBooks(
+    return await bookSearchRepo.fetchSearchBooks(
       q: q,
     );
   }
