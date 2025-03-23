@@ -1,3 +1,4 @@
+import 'package:booky/Features/book_library/presentation/manager/cubit/book_library_cubit.dart';
 import 'package:booky/Features/search_book/presentation/manager/cubit/search_book_cubit.dart';
 import 'package:booky/core/constant/app_color.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 AppBar customAppBar(BuildContext context, onPressed) {
   return AppBar(
+    leading: InkWell(
+        onTap: () async {
+          BookLibraryCubit cubit = BlocProvider.of<BookLibraryCubit>(context);
+          cubit.books = [];
+          cubit.pageNumber = 0;
+          await cubit.fetchBooks(pageNumber: 0);
+        },
+        child: Icon(Icons.replay_outlined)),
     backgroundColor: AppColor.primaryColor,
     title: const Text(
       'Booky',

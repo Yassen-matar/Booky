@@ -41,7 +41,7 @@ class BookDetail extends StatelessWidget {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10,),
-                    Text(books.authorName! ,style: TextStyle(fontWeight: FontWeight.w600),),
+                    Text(books.authorName! ,style: const TextStyle(fontWeight: FontWeight.w600),),
                     const SizedBox(height: 10,),
                     RatingBar.readOnly(
                       alignment: Alignment.center,
